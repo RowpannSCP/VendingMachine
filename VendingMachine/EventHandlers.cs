@@ -5,6 +5,7 @@ namespace VendingMachine
     using System;
     using System.Linq;
     using Exiled.API.Features;
+    using Random = UnityEngine.Random;
 
     public class EventHandlers
     {
@@ -42,13 +43,19 @@ namespace VendingMachine
                 return;
             }
 
+            var types = Enum.GetValues(typeof(ItemType)) as ItemType[];
             try
             {
                 foreach (var item in deal.Items)
                 {
                     for (int i = 0; i < item.Key; i++)
                     {
-                        ev.Player.AddItem(item.Value);
+                        ItemType type = item.Value;
+                        if (type == ItemType.None)
+                        {
+                            type = types.ElementAt(Random.Range(0, types.Count() - 1));
+                        }
+                        ev.Player.AddItem(type);
                     }
                 }
             }
