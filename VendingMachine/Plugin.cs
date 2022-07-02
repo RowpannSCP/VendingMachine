@@ -6,10 +6,10 @@ namespace VendingMachine
 {
     public class Plugin : Plugin<Config>
     {
-        public override string Author { get; }
-        public override string Name { get; }
-        public override Version Version { get; }
-        public override Version RequiredExiledVersion { get; }
+        public override string Author { get; } = "moddedmcplayer";
+        public override string Name { get; } = "VendingMachine";
+        public override Version Version { get; } = new Version(1, 0, 0);
+        public override Version RequiredExiledVersion { get; } = new Version(5, 2, 1);
 
         private EventHandlers _handlers;
         

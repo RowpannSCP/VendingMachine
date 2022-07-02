@@ -2,6 +2,10 @@
 
 namespace VendingMachine
 {
+    using System;
+    using System.Linq;
+    using Exiled.API.Features;
+
     public class EventHandlers
     {
         private Config _cfg;
@@ -9,7 +13,52 @@ namespace VendingMachine
 
         public void ButtonInteracted(ButtonInteractedEventArgs ev)
         {
-            throw new System.NotImplementedException();
+            Log.Debug($"Button pressed: {ev.Player}; {ev.Button}; {ev.Schematic.Name}", _cfg.ShowDebug);
+            var deal = _cfg.Deals.FirstOrDefault(x => x.SchematicName == ev.Schematic.Name);
+
+            if (deal is null)
+            {
+                return;
+            }
+            
+            Log.Debug($"Deal: {deal.SchematicName}; {deal.RequiredItems}; {deal.Items}", _cfg.ShowDebug);
+            var ply = ev.Player;
+
+            foreach (var item in deal.RequiredItems)
+            {
+                var amount = ply.Items.Count(x => x.Type == item.Value);
+                if (amount < item.Key)
+                {
+                    ply.Broadcast(5, "Missing " + (item.Key - amount) + " " + item.Value
+                        .ToString()
+                        .Replace("ItemType.", ""));
+                    return;
+                }
+            }
+            
+            if(ev.Player.Items.Count + deal.Items.Count > 8 && !_cfg.IgnoreSpace)
+            {
+                ply.Broadcast(5, "You don't have enough space in your inventory!");
+                return;
+            }
+
+            try
+            {
+                foreach (var item in deal.Items)
+                {
+                    for (int i = 0; i < item.Key; i++)
+                    {
+                        ev.Player.AddItem(item.Value);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ev.Player.Broadcast(5, "An error occurred adding items!");
+                throw;
+            }
+            
+            ev.Player.ShowHint("Purchase successful!");
         }
     }
 }

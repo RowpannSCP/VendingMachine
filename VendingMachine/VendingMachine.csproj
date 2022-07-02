@@ -87,6 +87,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="EventHandlers.cs" />
+        <Compile Include="Models\DealModel.cs" />
         <Compile Include="Plugin.cs" />
         <Compile Include="Config.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
