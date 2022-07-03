@@ -50,7 +50,7 @@ namespace VendingMachine
                 {
                     for (int i = 0; i < item.Key; i++)
                     {
-                        ItemType type = item.Value;
+                        ItemType type = item.Value.RandomItem();
                         if (type == ItemType.None)
                         {
                             type = types.ElementAt(Random.Range(0, types.Count() - 1));

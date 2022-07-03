@@ -27,9 +27,14 @@ namespace VendingMachine
                     {1, ItemType.Coin}
                 },
 
-                Items = new Dictionary<int, ItemType>()
+                Items = new Dictionary<int, List<ItemType>>()
                 {
-                    {1, ItemType.None}
+                    {
+                        1, new List<ItemType>()
+                        {
+                            ItemType.None
+                        }
+                    }
                 }
             }
         };
