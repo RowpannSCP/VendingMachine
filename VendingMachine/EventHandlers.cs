@@ -4,6 +4,7 @@ namespace VendingMachine
 {
     using System;
     using System.Linq;
+    using Exiled.API.Extensions;
     using Exiled.API.Features;
     using Random = UnityEngine.Random;
 
@@ -63,6 +64,20 @@ namespace VendingMachine
             {
                 ev.Player.Broadcast(5, "An error occurred adding items!");
                 throw;
+            }
+            
+            foreach (var item in deal.RequiredItems)
+            {
+                for (int i = 0; i < item.Key; i++)
+                {
+                    var ToRemove = ev.Player.Items.FirstOrDefault(x => x.Type == item.Value);
+                    if (ToRemove is null)
+                    {
+                        return;
+                    }
+
+                    ev.Player.RemoveItem(ToRemove);
+                }
             }
             
             ev.Player.ShowHint("Purchase successful!");
