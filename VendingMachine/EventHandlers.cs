@@ -3,7 +3,9 @@
 namespace VendingMachine
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using Exiled.API.Enums;
     using Exiled.API.Extensions;
     using Exiled.API.Features;
     using Random = UnityEngine.Random;
@@ -31,7 +33,7 @@ namespace VendingMachine
                 var amount = ply.Items.Count(x => x.Type == item.Value);
                 if (amount < item.Key)
                 {
-                    ply.Broadcast(5, "Missing " + (item.Key - amount) + " " + item.Value
+                    ply.Broadcast(4, "Missing " + (item.Key - amount) + " " + item.Value
                         .ToString()
                         .Replace("ItemType.", ""));
                     return;

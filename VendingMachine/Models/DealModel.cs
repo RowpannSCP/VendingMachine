@@ -1,7 +1,6 @@
 namespace VendingMachine.Models
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
 
     public class DealModel
     {
