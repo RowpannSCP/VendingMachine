@@ -12,6 +12,9 @@ namespace VendingMachine
 
         public bool ShowDebug { get; set; } = false;
         
+        [Description("Shown when player dosent have enough money")]
+        public ushort BroadcastTime { get; set; } = 4;
+        
         [Description("Will give items even if there is no space in the inventory.")]
         public bool IgnoreSpace { get; set; } = false;
 

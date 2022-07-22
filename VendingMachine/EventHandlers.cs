@@ -33,7 +33,7 @@ namespace VendingMachine
                 var amount = ply.Items.Count(x => x.Type == item.Value);
                 if (amount < item.Key)
                 {
-                    ply.Broadcast(4, "Missing " + (item.Key - amount) + " " + item.Value
+                    ply.Broadcast(_cfg.BroadcastTime, "Missing " + (item.Key - amount) + " " + item.Value
                         .ToString()
                         .Replace("ItemType.", ""));
                     return;
