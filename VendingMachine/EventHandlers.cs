@@ -17,15 +17,14 @@ namespace VendingMachine
 
         public void ButtonInteracted(ButtonInteractedEventArgs ev)
         {
-            Log.Debug($"Button pressed: {ev.Player}; {ev.Button}; {ev.Schematic.Name}", _cfg.ShowDebug);
+            Log.Debug($"Button pressed: {ev.Player}; {ev.Button}; {ev.Schematic.Name}");
             var deal = _cfg.Deals.FirstOrDefault(x => x.SchematicName == ev.Schematic.Name);
 
             if (deal is null)
             {
                 return;
             }
-            
-            Log.Debug($"Deal: {deal.SchematicName}; {deal.RequiredItems}; {deal.Items}", _cfg.ShowDebug);
+            Log.Debug($"Deal: {deal.SchematicName}; {deal.RequiredItems}; {deal.Items}");
             var ply = ev.Player;
 
             foreach (var item in deal.RequiredItems)

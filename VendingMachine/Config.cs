@@ -10,7 +10,7 @@ namespace VendingMachine
     {
         public bool IsEnabled { get; set; } = true;
 
-        public bool ShowDebug { get; set; } = false;
+        public bool Debug { get; set; } = false;
         
         [Description("Shown when player dosent have enough money")]
         public ushort BroadcastTime { get; set; } = 4;
