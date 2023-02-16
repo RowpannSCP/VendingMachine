@@ -17,7 +17,9 @@ namespace VendingMachine
 
         public void ButtonInteracted(ButtonInteractedEventArgs ev)
         {
-            Log.Debug($"Button pressed: {ev.Player}; {ev.Button}; {ev.Schematic.Name}");
+            //Log.Debug($"Button pressed: {ev?.Player.ToString() ?? "null"}; {/*{ev?.Button}*/""}; {ev?.Schematic.Name ?? "null"}");
+            if (ev.Player == null || ev.Button == null || ev.Schematic == null)
+                return;
             var deal = _cfg.Deals.FirstOrDefault(x => x.SchematicName == ev.Schematic.Name);
 
             if (deal is null)
